@@ -3,11 +3,8 @@ output
 output*
 instant_test_output
 inference_test_output
-
-
 *.json
 *.diff
-
 # compilation and distribution
 __pycache__
 _ext
@@ -45,3 +42,4 @@ _darcs
 !/datasets/*.*
 /projects/*/datasets
 
+/*.txt

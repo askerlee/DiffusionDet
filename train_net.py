@@ -264,6 +264,10 @@ def setup(args):
 def main(args):
     cfg = setup(args)
 
+    register_coco_instances("insegcat_train", {}, "/data/shaohua/insegcat-1/train.json", "/data/shaohua/insegcat-1/")
+    register_coco_instances("insegcat_test",  {}, "/data/shaohua/insegcat-1/test.json",  "/data/shaohua/insegcat-1/")
+    #dataset_dicts = DatasetCatalog.get("insegcat_train")
+
     if args.eval_only:
         model = Trainer.build_model(cfg)
         kwargs = may_get_ema_checkpointer(cfg, model)
@@ -286,10 +290,6 @@ def main(args):
 
 
 if __name__ == "__main__":
-    register_coco_instances("insegcat_train", {}, "/data/shaohua/insegcat-1/train.json", "/data/shaohua/insegcat-1/")
-    register_coco_instances("insegcat_test",  {}, "/data/shaohua/insegcat-1/test.json",  "/data/shaohua/insegcat-1/")
-    dataset_dicts = DatasetCatalog.get("insegcat_train")
-
     args = default_argument_parser().parse_args()
     print("Command Line Args:", args)
     launch(

@@ -11,8 +11,10 @@ DATASETS:
   TRAIN: ("insegcat_train",)
   TEST:  ("insegcat_test",)
 SOLVER:
-  STEPS: (350000, 420000)
-  MAX_ITER: 450000
+  STEPS: (1000, 1500)
+  # The default GAMMA is 0.1.
+  GAMMA: 0.2
+  MAX_ITER: 2000
 INPUT:
   CROP:
     ENABLED: True
