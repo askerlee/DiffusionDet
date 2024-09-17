@@ -25,7 +25,8 @@ import detectron2.utils.comm as comm
 from detectron2.utils.logger import setup_logger
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import get_cfg
-from detectron2.data import build_detection_train_loader
+from detectron2.data import build_detection_train_loader, DatasetCatalog
+from detectron2.data.datasets import register_coco_instances
 from detectron2.engine import DefaultTrainer, default_argument_parser, default_setup, launch, create_ddp_model, \
     AMPTrainer, SimpleTrainer, hooks
 from detectron2.evaluation import COCOEvaluator, LVISEvaluator, verify_results
@@ -285,6 +286,10 @@ def main(args):
 
 
 if __name__ == "__main__":
+    register_coco_instances("insegcat_train", {}, "/data/shaohua/insegcat-1/train.json", "/data/shaohua/insegcat-1/")
+    register_coco_instances("insegcat_test",  {}, "/data/shaohua/insegcat-1/test.json",  "/data/shaohua/insegcat-1/")
+    dataset_dicts = DatasetCatalog.get("insegcat_train")
+
     args = default_argument_parser().parse_args()
     print("Command Line Args:", args)
     launch(
