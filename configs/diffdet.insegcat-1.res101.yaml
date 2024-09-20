@@ -6,15 +6,23 @@ MODEL:
     STRIDE_IN_1X1: False
   DiffusionDet:
     NUM_PROPOSALS: 500
-    NUM_CLASSES: 80
+    NUM_CLASSES: 11
 DATASETS:
   TRAIN: ("insegcat_train",)
   TEST:  ("insegcat_test",)
 SOLVER:
-  STEPS: (1000, 1500)
+  AMP:
+    ENABLED: True
+  CHECKPOINT_PERIOD: 2000
+  BASE_LR: 2e-6
+  LR_SCHEDULER_NAME: WarmupCosineLR
+  # Default scheduler name: WarmupMultiStepLR
+  # correspoinding scheduler: MultiStepParamScheduler.
+  # It can be combined with AdamW optimizer.
+  # STEPS: (1000020000, 25000)
   # The default GAMMA is 0.1.
-  GAMMA: 0.2
-  MAX_ITER: 2000
+  # GAMMA: 0.2
+  MAX_ITER: 30000
 INPUT:
   CROP:
     ENABLED: True
