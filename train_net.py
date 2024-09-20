@@ -63,7 +63,9 @@ class Trainer(DefaultTrainer):
         )
 
         self.scheduler = self.build_lr_scheduler(cfg, optimizer)
-
+        
+        # After cfg.freeze(), if you want modfiy cfg, you have to cfg.defrost().
+        cfg.defrost()
         # Adding a timestamp to the output directory to distinguish each run
         output_dir = os.path.join("output", datetime.now().strftime("%m%d-%H%M%S"))
         cfg.OUTPUT_DIR = output_dir
