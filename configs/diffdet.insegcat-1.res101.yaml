@@ -23,6 +23,8 @@ SOLVER:
   # The default GAMMA is 0.1.
   # GAMMA: 0.2
   MAX_ITER: 30000
+TEST:
+  EVAL_PERIOD: 2000
 INPUT:
   CROP:
     ENABLED: True

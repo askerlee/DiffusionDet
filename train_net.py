@@ -36,7 +36,7 @@ from detectron2.modeling import build_model
 from diffusiondet import DiffusionDetDatasetMapper, add_diffusiondet_config, DiffusionDetWithTTA
 from diffusiondet.util.model_ema import add_model_ema_configs, may_build_model_ema, may_get_ema_checkpointer, EMAHook, \
     apply_model_ema_and_restore, EMADetectionCheckpointer
-
+from datetime import datetime
 
 class Trainer(DefaultTrainer):
     """ Extension of the Trainer class adapted to DiffusionDet. """
@@ -63,6 +63,10 @@ class Trainer(DefaultTrainer):
         )
 
         self.scheduler = self.build_lr_scheduler(cfg, optimizer)
+
+        # Adding a timestamp to the output directory to distinguish each run
+        output_dir = os.path.join("output", datetime.now().strftime("%m%d-%H%M%S"))
+        cfg.OUTPUT_DIR = output_dir
 
         ########## EMA ############
         kwargs = {
